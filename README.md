@@ -1,5 +1,7 @@
 # OGC: Ordinary Garbage Collector
 
+## About
+
 OGC implements the typical "mark and sweep" algorithm. It works as follows:
 * there is an internal struct representing a block of memory
 * there is a list of blocks representing the allocated memory, and another
@@ -15,6 +17,24 @@ OGC implements the typical "mark and sweep" algorithm. It works as follows:
         + we then call "sweep" with the global allocated memory list
         + every block that is not marked is not used, and can be freed and
           popped from given list
+
+
+## How it works
+
+For a basic mark and sweep garbage collector, two things are required:
+* a list of all of the allocations made by the program;
+* a list of all the allocations in use by the program at any given time;
+
+With these two things the algorithm is simple - compare the two lists and
+free any allocations which are in the first list, but not in the second -
+exactly those allocations which are no longer in use.
+
+To get a list of all the allocations made by the progam is relatively
+simple. We make the programmer use a special function we have prepared
+(in this case `gc_alloc`) which allocates memory, and then adds a pointer
+to that memory to an internal list. If at any point this allocation is
+freed (such as by `gc_free`), it is removed from the list.
+
 
 ## Function list
 
