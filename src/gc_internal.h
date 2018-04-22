@@ -1,6 +1,7 @@
 #ifndef GC_INTERNAL_H
 #define GC_INTERNAL_H
 
+#include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "gc.h"
