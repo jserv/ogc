@@ -9,7 +9,7 @@ void *gc_alloc(size_t size)
     gc_ptr_t p = (gc_ptr_t){
         .start = ptr,
         .size = size,
-        .marked = 3,
+        .marked = true,
     };
     if (__gc_object.min > ptr)
         __gc_object.min = ptr;
